@@ -1221,7 +1221,7 @@ index 0000000000000000000000000000000000000000..2fd6c3e65354071af71c7d8ebb97b559
 +}
 diff --git a/src/main/java/io/papermc/paper/adventure/PaperAdventure.java b/src/main/java/io/papermc/paper/adventure/PaperAdventure.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..cb3317c185df84cba89e62ec36d221b9691c3678
+index 0000000000000000000000000000000000000000..c20f9edc413e66e20402eefd01a483d1e29b6a55
 --- /dev/null
 +++ b/src/main/java/io/papermc/paper/adventure/PaperAdventure.java
 @@ -0,0 +1,417 @@
@@ -1627,19 +1627,19 @@ index 0000000000000000000000000000000000000000..cb3317c185df84cba89e62ec36d221b9
 +    // Style
 +
 +    public static net.minecraft.network.chat.Style asVanilla(Style style) {
-+        net.minecraft.nbt.Tag encoded = Util.getOrThrow(AdventureCodecs.STYLE_MAP_CODEC.codec()
-+            .encodeStart(net.minecraft.nbt.NbtOps.INSTANCE, style), IllegalStateException::new);
++        Object encoded = Util.getOrThrow(AdventureCodecs.STYLE_MAP_CODEC.codec()
++            .encodeStart(net.minecraft.util.JavaOps.INSTANCE, style), IllegalStateException::new);
 +
 +        return Util.getOrThrow(net.minecraft.network.chat.Style.Serializer.CODEC
-+            .parse(net.minecraft.nbt.NbtOps.INSTANCE, encoded), IllegalStateException::new);
++            .parse(net.minecraft.util.JavaOps.INSTANCE, encoded), IllegalStateException::new);
 +    }
 +
 +    public static Style asAdventure(net.minecraft.network.chat.Style style) {
-+        net.minecraft.nbt.Tag encoded = Util.getOrThrow(net.minecraft.network.chat.Style.Serializer.CODEC
-+            .encodeStart(net.minecraft.nbt.NbtOps.INSTANCE, style), IllegalStateException::new);
++        Object encoded = Util.getOrThrow(net.minecraft.network.chat.Style.Serializer.CODEC
++            .encodeStart(net.minecraft.util.JavaOps.INSTANCE, style), IllegalStateException::new);
 +
 +        return Util.getOrThrow(AdventureCodecs.STYLE_MAP_CODEC.codec()
-+            .parse(net.minecraft.nbt.NbtOps.INSTANCE, encoded), IllegalStateException::new);
++            .parse(net.minecraft.util.JavaOps.INSTANCE, encoded), IllegalStateException::new);
 +    }
 +}
 diff --git a/src/main/java/io/papermc/paper/adventure/WrapperAwareSerializer.java b/src/main/java/io/papermc/paper/adventure/WrapperAwareSerializer.java
